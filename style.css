@@ -1,0 +1,315 @@
+/* 01｜全域設定與復古配色 */
+:root{--wall:#e0f5d2;--wall-line:#94b184;--light:#def4cd;--button:#afd68f;--dark:#102621;--outline:#1d3729;--shadow:#6d9564;--pixel:'Press Start 2P',monospace;--body:'Noto Sans TC',sans-serif}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--dark);font-family:var(--body);background-color:var(--wall);background-image:linear-gradient(var(--wall-line) 5px,transparent 5px),linear-gradient(90deg,var(--wall-line) 5px,transparent 5px);background-size:180px 72px;background-position:0 0,0 0}
+button{font:inherit;cursor:pointer}
+
+/* 02｜整體左右版面 */
+.game-layout{max-width:1100px;min-height:100vh;margin:auto;display:grid;grid-template-columns:390px minmax(0,1fr);gap:26px;align-items:center;padding:40px 22px}
+.left-area{display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+.left-bottom{display:flex;align-items:center;width:100%;gap:0}
+
+/* 03｜像素視窗邊框 */
+.pixel-frame{border:5px solid var(--outline);box-shadow:inset 0 0 0 5px var(--shadow),inset 0 0 0 9px var(--light),7px 7px 0 var(--shadow);border-radius:12px}
+.hello{background:var(--dark);color:var(--light);width:258px;margin:0 8px 0 0;padding:21px 12px;text-align:center;font:9px/2 var(--pixel)}
+
+/* 04｜左側選單 */
+.menu{display:flex;flex-direction:column;gap:12px;flex:0 0 116px;z-index:1}
+.menu-btn{min-height:64px;background:var(--button);color:var(--dark);border:4px solid var(--outline);box-shadow:4px 4px 0 var(--shadow);border-radius:7px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;font:9px var(--pixel);transition:background .15s}
+.menu-btn span:first-child{font:22px var(--body)}
+.menu-btn:hover,.menu-btn.active{background:#d7efbb}
+.menu-btn:focus-visible{outline:3px dashed var(--dark);outline-offset:4px}
+
+/* 05｜個人角色卡 */
+.profile{background:var(--dark);color:var(--light);flex:1;min-width:0;min-height:330px;text-align:center;padding:27px 14px 22px}
+.portrait{width:145px;height:170px;background:#c6e4af;border:4px solid var(--shadow);margin:0 auto 20px;display:grid;place-items:center;overflow:hidden}
+.portrait img{width:100%;height:100%;object-fit:cover}
+.photo-placeholder::after{content:'YOUR PHOTO';font:9px/2 var(--pixel);color:var(--outline)}
+.profile h1{font:15px/1.8 var(--pixel);margin:0 0 10px;overflow-wrap:anywhere}
+.profile p{font:10px/1.8 var(--pixel);margin:0}
+.footer-note{font:9px var(--pixel);margin:8px 12px 0 0}
+
+/* ========================================
+   PROFILE - 真人 / 像素角色切換
+======================================== */
+
+/* 頭貼切換容器 */
+.profile-switch {
+    position: relative;
+    overflow: hidden;
+}
+
+/* 兩張圖片共用設定 */
+.profile-switch img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.3s ease;
+}
+
+/* 真人照片：填滿頭貼框 */
+.profile-switch .profile-real {
+    object-fit: cover;
+    opacity: 1;
+}
+
+/* 像素角色：完整顯示 */
+.profile-switch .profile-pixel {
+    object-fit: contain;
+    opacity: 0;
+    image-rendering: pixelated;
+}
+
+/* 滑鼠移入：真人淡出 */
+.profile-switch:hover .profile-real {
+    opacity: 0;
+}
+
+/* 滑鼠移入：像素角色淡入 */
+.profile-switch:hover .profile-pixel {
+    opacity: 1;
+}
+
+/* 06｜右側主視窗 */
+.content-panel{height:500px;overflow-y:auto;background:var(--light);padding:45px 40px;scrollbar-color:var(--shadow) var(--light)}
+.page[hidden]{display:none}
+.chapter{font:9px var(--pixel);letter-spacing:1px;margin:0 0 26px}
+h2{font:20px/1.5 var(--pixel);letter-spacing:1px;margin:0 0 28px;overflow-wrap:anywhere}
+.page>p:not(.chapter){line-height:2.1;font-size:15px}
+.story-card{border:3px solid var(--outline);padding:16px;margin:20px 0;background:#ecf8e2}
+.story-card h3{font-size:16px;margin:0 0 8px}
+.story-card p{line-height:1.8;font-size:14px}
+.photo-slot{min-height:110px;border:2px dashed var(--shadow);display:grid;place-items:center;color:#57724d;font-size:13px}
+
+/* 07｜手機版 RWD */
+@media(max-width:800px){.game-layout{grid-template-columns:1fr;gap:24px;padding:25px 14px}.left-area{align-items:center}.left-bottom{max-width:440px}.hello{align-self:center}.content-panel{width:100%;height:auto;min-height:380px;max-height:70vh;padding:32px 22px}.footer-note{align-self:center}}
+@media(max-width:400px){.menu{flex-basis:95px}.menu-btn{font-size:7px;min-height:58px}.profile{padding:22px 8px;min-height:310px}.portrait{width:115px;height:145px}.profile h1{font-size:11px}.profile p{font-size:8px}.hello{max-width:95%;font-size:8px}h2{font-size:16px}}
+
+/* 08｜套用首頁字體 */
+.pixel-text {
+    font-family: "Press Start 2P", monospace;
+    font-size: 12px;
+}
+
+/* 09｜skill頁面水平線 */
+.project-divider {
+    border: none;
+    border-top: 1px solid #a1bd91;
+    margin: 12px 0;
+}
+
+/* 10｜project按鈕水平顯示及排版 */
+.project-link {
+    flex-shrink: 0;
+    display: inline-flex;
+    font-family: var(--pixel);
+    font-size: 8px;
+    color: #18372b;
+    background: #afd68f;
+    border: 2px solid #18372b;
+    padding: 6px 8px;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+/* 控制技術堆疊與按鈕水平排列 */
+.project-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 移除段落預設間距 */
+.project-bottom p {
+    margin: 0;
+    flex: 1;
+    min-width: 0;
+}
+
+.project-link:hover {
+    background: #dff5d2;
+}
+
+/* 11｜工作經歷排版 */
+.work-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.work-header h3 {
+    margin: 0;
+}
+
+.work-date {
+    color: #999999;
+    font-size: 12px;
+    font-style: italic;
+    white-space: nowrap;
+}
+
+/* 12｜CONTACT 聯絡方式 */
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.contact-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 15px 18px;
+    background: var(--button);
+    border: 3px solid var(--outline);
+
+    color: var(--dark);
+    text-decoration: none;
+    font-family: var(--pixel);
+    font-size: 10px;
+
+    transition: background 0.2s;
+}
+
+.contact-link:hover {
+    background: #d7efbb;
+}
+
+/* 13｜SKILLS｜工作經歷及作品集展示圖片 */
+.work-image {
+    display: block;
+    width: 100%;
+    height: 110px;
+    object-fit: contain;
+    object-position: center;
+    margin: 12px auto;
+    image-rendering: pixelated;
+}
+
+/* CUPMARK 作品展示圖片 */
+.project-image {
+    display: block;
+    width: 100%;
+    max-width: 650px;
+    height: auto;
+    object-fit: contain;
+    margin: 20px auto;
+}
+
+/* 14 人生故事照片輪播 */
+
+/* 相簿共用設定 */
+.memory-gallery {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+    background: #eaf5e2;
+    border: 3px solid #78956e;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* 音樂、足球：4:3 橫式 */
+.memory-gallery.landscape {
+    aspect-ratio: 4 / 3;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 甜點照片 直式 */
+.memory-gallery.portrait {
+    width: 100%;
+    max-width: 450px;
+    height: 400px;
+    aspect-ratio: auto;
+    margin: 20px auto 0;
+}
+
+/* 相簿照片 */
+.memory-photo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* 左右切換按鈕 */
+.gallery-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    background: #a9d18e;
+    color: #213b2c;
+    border: 2px solid #213b2c;
+
+    padding: 8px 12px;
+    cursor: pointer;
+    z-index: 2;
+
+    font-family: inherit;
+    font-size: 16px;
+}
+
+/* 滑鼠移到按鈕時 */
+.gallery-btn:hover {
+    background: #85b86c;
+}
+
+/* 上一張 */
+.gallery-btn.prev {
+    left: 10px;
+}
+
+/* 下一張 */
+.gallery-btn.next {
+    right: 10px;
+}
+
+/* 照片張數顯示 */
+.gallery-counter {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+
+    background: #eaf5e2;
+    color: #213b2c;
+    border: 2px solid #213b2c;
+
+    padding: 3px 8px;
+    font-size: 14px;
+    z-index: 2;
+}
+
+/* 手機版自適應 */
+@media (max-width: 600px) {
+
+    .memory-gallery.landscape {
+        max-width: 100%;
+    }
+
+    .memory-gallery.portrait {
+        max-width: 85%;
+    }
+
+    .gallery-btn {
+        padding: 6px 9px;
+        font-size: 14px;
+    }
+
+    .gallery-counter {
+        font-size: 12px;
+    }
+}
